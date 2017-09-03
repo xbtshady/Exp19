@@ -9,15 +9,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+
+    private OverWatch[] overWatches = {new OverWatch("猎空",R.drawable.img_1),new OverWatch("猎空",R.drawable.img_2),
+            new OverWatch("猎空",R.drawable.img_3),new OverWatch("猎空",R.drawable.img_5),
+            new OverWatch("猎空",R.drawable.img_6),new OverWatch("猎空",R.drawable.img_7),
+            new OverWatch("猎空",R.drawable.img_8),new OverWatch("猎空",R.drawable.img_9),
+            new OverWatch("猎空",R.drawable.img_10),new OverWatch("猎空",R.drawable.img_11)};
+
+    private List<OverWatch> overWatchList = new ArrayList<>();
+
+    private OverWatchAdapter overWatchAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        //图片加载
+        initOverWatch();
+        RecyclerView reccyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(MainActivity.this,2);
+        overWatchAdapter = new OverWatchAdapter(overWatchList);
+        reccyclerView.setAdapter(overWatchAdapter);
     }
 
     /*
@@ -98,5 +121,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    //存放图片
+    private  void initOverWatch(){
+        overWatchList.clear();
+        for (int i = 0; i < 50; i++){
+            Random random = new Random();
+            int index = random.nextInt(overWatches.length);
+            overWatchList.add(overWatches[index]);
+        }
     }
 }
