@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         initOverWatch();
         RecyclerView reccyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(MainActivity.this,2);
+        reccyclerView.setLayoutManager(layoutManager);
         overWatchAdapter = new OverWatchAdapter(overWatchList);
         reccyclerView.setAdapter(overWatchAdapter);
     }

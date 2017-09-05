@@ -28,6 +28,7 @@ public class OverWatchAdapter extends RecyclerView.Adapter<OverWatchAdapter.View
         CardView cardView;
         ImageView overwatchImage;
         TextView overwatchName;
+
         public ViewHolder(View view){
             super(view);
             cardView = (CardView) view;
@@ -44,7 +45,7 @@ public class OverWatchAdapter extends RecyclerView.Adapter<OverWatchAdapter.View
         if(mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.fruit_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.overwatch_item,parent,false);
         return  new ViewHolder(view);
     }
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
