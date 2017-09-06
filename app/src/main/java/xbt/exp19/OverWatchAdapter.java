@@ -1,6 +1,7 @@
 package xbt.exp19;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,7 +47,19 @@ public class OverWatchAdapter extends RecyclerView.Adapter<OverWatchAdapter.View
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.overwatch_item,parent,false);
-        return  new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                OverWatch overWatch = mOverWatch.get(position);
+                Intent intent = new Intent(mContext,Main2Activity.class);
+                intent.putExtra(Main2Activity.OVERWATCH_NAME, overWatch.getName());
+                intent.putExtra(Main2Activity.OVERWATCH_IMAGE_ID,overWatch.getImageID());
+                mContext.startActivity(intent);
+            }
+        });
+        return  holder;
     }
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         OverWatch overWatch = mOverWatch.get(position);

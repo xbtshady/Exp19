@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private List<OverWatch> overWatchList = new ArrayList<>();
 
     private OverWatchAdapter overWatchAdapter;
+
+    private SwipeRefreshLayout swipeRefresh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +90,21 @@ public class MainActivity extends AppCompatActivity {
         //图片加载
         initOverWatch();
         RecyclerView reccyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
         GridLayoutManager layoutManager = new GridLayoutManager(MainActivity.this,2);
         reccyclerView.setLayoutManager(layoutManager);
         overWatchAdapter = new OverWatchAdapter(overWatchList);
         reccyclerView.setAdapter(overWatchAdapter);
+
+        //下拉刷新
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swip_refresh);
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshOverWatch();
+            }
+        });
     }
 
     /*
@@ -132,5 +146,27 @@ public class MainActivity extends AppCompatActivity {
             int index = random.nextInt(overWatches.length);
             overWatchList.add(overWatches[index]);
         }
+    }
+
+    //刷新图片
+    private  void refreshOverWatch(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(1000);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initOverWatch();
+                        overWatchAdapter.notifyDataSetChanged();
+                        swipeRefresh.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
     }
 }
