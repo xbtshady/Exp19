@@ -19,7 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity"
-            android:theme="@style/OverWatchTheme"></activity>
+                    android:theme="@style/OverWatchTheme">
+            <intent-filter>
+                <action android:name="XX"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="ww"/>
+                <category android:name="xw"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

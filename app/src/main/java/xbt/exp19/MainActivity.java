@@ -1,6 +1,7 @@
 package xbt.exp19;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -124,12 +125,22 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);//打开标题栏
                 break;
             case R.id.backup:
+                Intent intent = new Intent("XX");
+                intent.addCategory("ww");
+                intent.addCategory("xw");
+                startActivity(intent);
                 Toast.makeText(MainActivity.this,"backup",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete:
+                Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                intent1.setData(Uri.parse("http://www.baidu.com"));
+                startActivity(intent1);
                 Toast.makeText(MainActivity.this,"delete",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.settings:
+                Intent intent2 = new Intent(Intent.ACTION_DIAL);
+                intent2.setData(Uri.parse("tel:10086"));
+                startActivity(intent2);
                 Toast.makeText(MainActivity.this,"settings",Toast.LENGTH_SHORT).show();
                 break;
             default:

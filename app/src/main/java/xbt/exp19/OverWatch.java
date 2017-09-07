@@ -1,10 +1,12 @@
 package xbt.exp19;
 
+import java.io.Serializable;
+
 /**
  * Created by xbt on 2017/9/3.
  */
 
-public class OverWatch {
+public class OverWatch implements Serializable {
 
     private String name;
 

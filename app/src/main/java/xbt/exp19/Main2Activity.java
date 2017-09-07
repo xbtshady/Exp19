@@ -23,9 +23,10 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         //获取图片的name和ID
-        Intent intent = getIntent();
-        String overWatchName = intent.getStringExtra(OVERWATCH_NAME);
-        int overWatchId = intent.getIntExtra(OVERWATCH_IMAGE_ID, 0);
+        OverWatch overWatch = (OverWatch) getIntent().getSerializableExtra(OVERWATCH_NAME);
+        String overWatchName = overWatch.getName();
+        int overWatchId = overWatch.getImageID();
+       
 
         //标题栏设定
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

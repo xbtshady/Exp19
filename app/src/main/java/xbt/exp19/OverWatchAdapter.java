@@ -54,8 +54,7 @@ public class OverWatchAdapter extends RecyclerView.Adapter<OverWatchAdapter.View
                 int position = holder.getAdapterPosition();
                 OverWatch overWatch = mOverWatch.get(position);
                 Intent intent = new Intent(mContext,Main2Activity.class);
-                intent.putExtra(Main2Activity.OVERWATCH_NAME, overWatch.getName());
-                intent.putExtra(Main2Activity.OVERWATCH_IMAGE_ID,overWatch.getImageID());
+                intent.putExtra(Main2Activity.OVERWATCH_NAME, overWatch);
                 mContext.startActivity(intent);
             }
         });
